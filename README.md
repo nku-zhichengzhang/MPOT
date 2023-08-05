@@ -10,9 +10,6 @@
 [![License](https://img.shields.io/badge/license-Apache%202-blue)](./LICENSE)
 </div>
 
-<<<<<<< Updated upstream
-**Key motivation:** *Tracking both location and pose of multiple planar objects (MPOT) is of great significance to numerous real-world applications, including industry, education, geometry, art, and our daily life.*
-=======
 
 
 **Key motivation:** *Tracking both location and pose of multiple planar objects (MPOT) is of great significance to numerous real-world applications, including industrial, education, geometric, art, and our daily life.*
