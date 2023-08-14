@@ -94,7 +94,6 @@ class POTkpVOS(BaseData):
         self.samples_per_video = samples_per_video
         self.sampled_frames = sampled_frames
         self.videos = os.listdir(self.dir)
-        # ignore = [x.split('.')[0] for x in os.listdir('/home/ubuntu/zzc/MPOTMethods/STM-shape/'+tag+'/'+split+'/first')]
         # self.videos = [vid for vid in self.videos if not vid in ignore]
         self.length = len(self.videos) * samples_per_video
         self.max_obj = 1

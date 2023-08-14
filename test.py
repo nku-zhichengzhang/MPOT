@@ -1,17 +1,16 @@
 from libs.dataset.data import (
         ROOT, 
         build_dataset, 
-        test_multibatch_collate_fn, 
+        multibatch_collate_fn, 
+
     )
+
 
 from libs.dataset.transform_mpot import TestTransform
 from libs.utils.logger import AverageMeter
-from libs.utils.loss import *
 from libs.utils.utility import parse_args, write_mpot_mask_boxes
 from libs.models.models import STAN
-
 import torch
-import torch.optim as optim
 import torch.utils.data as data
 import libs.utils.logger as logger
 
@@ -24,7 +23,7 @@ from tensorboardX import SummaryWriter
 from progress.bar import Bar
 from collections import OrderedDict
 from tqdm import tqdm
-# from options import OPTION as opt
+import math
 
 cv2.setNumThreads(0)
 cv2.ocl.setUseOpenCL(False)
@@ -32,26 +31,21 @@ torch.backends.cudnn.enabled = True
 torch.backends.cudnn.benchmark = True
 MAX_FLT = 1e6
 
-# parse args
+# parse args (set random seed: 20)
 opt, _ = parse_args()
 code_id = '0'
-tag='res_original_bicubic_corner_aug_'+opt.cfg.split('.')[0]
-# Use CUDA
-device = 'cuda:{}'.format(code_id)
-coord_rate = int(opt.cfg.split('.')[0].split('_')[-1])
-use_gpu = torch.cuda.is_available() and int(opt.gpu_id) >= 0
+tag='res'
 split='test'
+
+# Use CUDA
+device = 'cuda:{}'.format(opt.gpu_id)
+use_gpu = torch.cuda.is_available() and int(opt.gpu_id) >= 0
+
+# initial logger
 LOG_DIR = os.path.join(opt.checkpoint,'log')
 writer = SummaryWriter(log_dir=LOG_DIR+code_id)
-saveroot = '/home/ubuntu/zzc/mpot_lambda_exp/STM-shape/res_original_bicubic_corner_aug_coord_'+str(coord_rate)+'/'+split+'/first/'
-if not os.path.exists(saveroot):
-    os.makedirs(saveroot)
 logger.setup(filename='test_out.log', resume=False)
 log = logger.getLogger(__name__)
-
-
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = code_id
 
 def main():
 
@@ -71,8 +65,8 @@ def main():
         size=input_dim
         )
 
-    testloader = data.DataLoader(testset, batch_size=1, shuffle=False, num_workers=1,
-                                 collate_fn=test_multibatch_collate_fn)
+    testloader = data.DataLoader(testset, batch_size=1, shuffle=True, num_workers=1,
+                                 collate_fn=multibatch_collate_fn)
     # Model
     log.info("Creating model")
 
@@ -114,11 +108,7 @@ def main():
                 net.load_param(weight)
             else:
                 net.load_param(weight['state_dict'])
-    optimizer = optim.Adam(net.parameters(), lr=opt.learning_rate,
-                        betas=opt.momentum, weight_decay=opt.weight_decay)
     
-    # net, _ = amp.initialize(net, optimizer, opt_level="O1")
-    # Train and val
     log.info('Runing model on dataset {}, totally {:d} videos'.format(opt.valset, len(testloader)))
 
     test(testloader,
@@ -129,35 +119,30 @@ def main():
     log.info('Results are saved at: {}'.format(os.path.join(ROOT, opt.output_dir, opt.valset)))
 
 def test(testloader, model, use_cuda, opt):
-    criterion = pot_criterion
     data_time = AverageMeter()
     loss = AverageMeter()
     
     bar = Bar('Processing', max=len(testloader))
-    pred_corner_max, pred_corner_min = 0, 0
-    # model.eval()
-    # ignore_dir = [x.split('.')[0] for x in os.listdir(saveroot)]
+
     with torch.no_grad():
         for batch_idx, data in enumerate(testloader):
             
-            frames, mask, _, corner, objs, infos = data
-            # if infos[0]['name'] in ignore_dir:
-            #     continue    
+            frames, mask, coord, corner, objs, infos = data
+
             N, T, C, H, W = frames.size()
-            # coord = coord.view(N,T,-1,4,2).cuda()
+            coord = coord.view(N,T,-1,4,2).cuda()
 
             frames = frames[0]
             mask = mask[0]
-            # coord = coord[0]
+            coord = coord[0]
             corner = corner[0]
             num_objects = objs[0]
-            # print(num_objects)
             info = infos[0]
-            # compute output
+
+            
             t1 = time.time()
             flag = info['flag']
-            scales = []
-            total_loss = 0.0
+            
             box = np.zeros((T,num_objects,4,2),dtype=np.float32)
             scores = np.zeros((T,num_objects,4),dtype=np.float32)
             firsts = info['frame']['firstframe']
@@ -165,14 +150,20 @@ def test(testloader, model, use_cuda, opt):
             c=0
             keys = []
             vals = []
+            # compute output
             for t in tqdm(range(1, T)):
                 if t == 1:
+                    # initialize the corner points and the object mask
                     tmp_mask = torch.zeros(1,num_objects+1,H,W).cuda()
                     tmp_corner = torch.zeros(num_objects,4,H,W).cuda()
+                # set the planar objects
                 for ob in range(len(firsts)):
                     if t-1 == firsts[ob]:
+                        # foreground masks of multiple planar objects
                         tmp_mask[0,ob+1] = mask[ob,1].cuda()
+                        # background masks of multiple planar objects
                         tmp_mask[0,0] = (tmp_mask[0,ob+1]==0).float() * tmp_mask[0,0]
+                        # corner points of multiple planar objects
                         tmp_corner[ob] = corner[ob].cuda()
 
                 if t == 1:
@@ -182,21 +173,26 @@ def test(testloader, model, use_cuda, opt):
                 # memorize
                 key, val, r4 = model(frame=frames[t-1:t].clone().to(device), mask=tmp_mask, corner=tmp_corner, num_objects=num_objects)
 
+                # remember the features at frame T
                 tmp_key = torch.cat(keys+[key], dim=1)
                 tmp_val = torch.cat(vals+[val], dim=1)
+                # segment at frame T+1 TODO: deal with sudden num_object change
                 output = model(frame=frames[t:t+1].clone().to(device), keys=tmp_key, values=tmp_val, num_objects=num_objects, max_obj=num_objects, is_train=True)
                 key = key.detach().cpu()
                 val = val.detach().cpu()
+                # decode the output, logits - object masks: 1x(O+1)xHxW , corner4 - corner points: Ox4xHxW
                 logits, corner4 = output['p2'], output['c2']
                 del output
                 torch.cuda.empty_cache()
                 # post processing
                 out = torch.softmax(logits, dim=1)
+                # computing the confidence
                 mask_conf = out[:,1:].max(-1).values.max(-1).values.mean().detach().cpu()
                 corner_conf = corner4.max(-1).values.max(-1).values.mean().detach().cpu()
-                # for o in range(num_objects):
+                # locate the corner points from the heatmap
                 pred_ord = torch.zeros(num_objects,4,2)
                 for ob in range(corner4.size(0)):
+                    # calcuate the score of each corner points
                     scores[t,ob] = corner4[ob].detach().cpu().view(4,-1).max(1).values.numpy()
                     for pt in range(4):
                         cm = corner4[ob,pt]
@@ -204,23 +200,21 @@ def test(testloader, model, use_cuda, opt):
                         x, y = idx % W, idx / W
                         px = int(math.floor(x + 0.5))
                         py = int(math.floor(y + 0.5))
+                        # human prior for peak rather than intepolation, since the model prediction is of lower resolution to the original image
                         diff=np.zeros(2)
-                        # if 1 < px < W-1 and 1 < py < H-1: # human prior for peak rather than intepolation
-                        #     diff = np.array([cm[py][px+1] - cm[py][px-1],
-                        #                     cm[py+1][px]-cm[py-1][px]])
-                        #     diff = np.sign(diff)
-                        
+                        if 1 < px < W-1 and 1 < py < H-1: 
+                            diff = np.array([cm[py][px+1] - cm[py][px-1],
+                                            cm[py+1][px]-cm[py-1][px]])
+                            diff = np.sign(diff)
                         pred_ord[ob,pt,0], pred_ord[ob,pt,1] = x+diff[0], y+diff[1]
                 cur_cnts = pred_ord.cuda().unsqueeze(0)
-                # print(coord.shape)
-                # total_loss = total_loss + (criterion(cur_cnts, coord[t:t+1])*flag[t].cuda()).sum()
-                c+=flag[t].sum()
+
                 box[t] = cur_cnts.cpu().numpy()*flag[t].view(1,num_objects,1,1).cpu().numpy()
                 del cur_cnts
                 torch.cuda.empty_cache()
-
+                # Reuse Gate
                 if (t-1) % opt.save_freq == 0 and corner_conf > 0.5 and mask_conf>0.5:
-                    # print(len(keys))
+                    # due to the limitation of CUDA memory, we maintain the memory pool at the size of 26
                     if len(keys)>26:
                         del keys[-13], vals[-13]
                     keys.append(key.cuda())
@@ -233,10 +227,14 @@ def test(testloader, model, use_cuda, opt):
                 
                 del corner4,tmp_key,tmp_val,out,r4,logits
                 torch.cuda.empty_cache()
-            
+
+
+            # record the planar objects
             idx=1
-            
-            with open(saveroot+info['name']+'.txt','w+')as txt:
+            save_dir = os.path.join('./res',split)
+            if not os.path.exists(save_dir):
+                os.makedirs(save_dir)
+            with open(os.path.join(save_dir,info['name']+'.txt'),'w+')as txt:
                 for o in range(num_objects):
                     objects = box[:,o]
                     start = firsts[o]
@@ -258,19 +256,13 @@ def test(testloader, model, use_cuda, opt):
                             for i in range(8):
                                 coord_txt+="%.2f," % coord[i]
                             info_txt = frame+','+id+','+coord_txt +c+'\n'
-                            # info += c+'\n'
                             txt.write(info_txt)
                     idx+=1
-                
-            # pred = torch.cat(pred, dim=0)
-            # pred = pred.detach().cpu().numpy()
-            box = np.array(box)
-            # print(box.shape)
+            
+            # visualize the results
             write_mpot_mask_boxes(box, info, opt, directory=opt.output_dir)
-            # write_mask(pred, info, opt, directory=opt.output_dir)
+            # record time
             toc = time.time() - t1
-            log.info(info['name'],toc)
-
             data_time.update(toc, 1)
 
             # plot progress
@@ -282,11 +274,10 @@ def test(testloader, model, use_cuda, opt):
             )
             bar.next()
             
-            del box, frames, mask
+            del box,  coord, frames, mask
             torch.cuda.empty_cache()
             del keys,vals
             torch.cuda.empty_cache()
-            
         bar.finish()
 
     return  data_time.sum, loss.avg

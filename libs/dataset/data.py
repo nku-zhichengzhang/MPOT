@@ -16,7 +16,7 @@ from ..utils.logger import getLogger
 
 __DATA_CONTAINER = {}
 
-ROOT = '/home/ubuntu11/zzc/data'
+ROOT = '/mnt/sda/zzc/data/track'
 MAX_TRAINING_OBJ = 5
 MAX_TRAINING_SKIP = 120
 
