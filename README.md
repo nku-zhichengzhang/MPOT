@@ -32,7 +32,7 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 </br>
 
 
-- [ **Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
+- [<img src="./assets/mpot_logo.ico" style="vertical-align: sub;" width="40"> **Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
   - [Publication](#publication)
 - [ABSTRACT](#abstract)
 - [DEPENDENCY](#dependency)
@@ -58,18 +58,38 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 # DEPENDENCY
 You can set up the environments by running the following lines:
 
-    conda env create -f environment.yml
-    pip install -r requirements.txt
+1. create virtual environment
+```
+conda create -n prtrack python=3.6.13
+```   
+    
+
+2. install torch and other
+```
+pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+pip install -r requirements.txt
+```
+3. install apex, please refer to their github page in [here](https://github.com/NVIDIA/apex).
+```
+git clone https://github.com/NVIDIA/apex
+cd apex
+# if pip >= 23.1 (ref: https://pip.pypa.io/en/stable/news/#v23-1) which supports multiple `--config-settings` with the same key... 
+pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --config-settings "--build-option=--cpp_ext" --config-settings "--build-option=--cuda_ext" ./
+# otherwise
+pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+```
+We also provide our environment as a reference at [`enviroment.yml`](./environment.yml).
+
 
 ### Recommended Environment
 * CUDA 11.3
 * Python 3.6.13
 * Pytorch 1.8.1 
-* apex:0.1 (only for training)
+* apex 0.1
 
 
 # MPOT-3K DATASET
-If you need the MPOT-3K dataset for academic purposes, please download the [application form](./assets/MPOT-3K_Data_Access_Form.docx) and fill out the request information, then send it to ***gloryzzc6@sina.com***.
+If you need the MPOT-3K dataset for academic purposes, please download the [**application form**](./assets/MPOT-3K_Data_Access_Form.docx) and fill out the request information, then send it to ***gloryzzc6@sina.com***.
 We will process your application as soon as possible.
 Please make sure that the email used comes from your educational institution.
 
@@ -145,7 +165,7 @@ Download the pretrained model from google drive [google](https://drive.google.co
 ## Running
 You can easily train and evaluate the model by running the script below.
 
-You can include more details such as epoch, milestone, learning_rate, etc. Please refer to `config_train.yaml`.
+You can include more details such as epoch, milestone, learning_rate, etc. Please refer to [`config_train.yaml`](configs/config_train.yaml).
 
 ~~~~
 python train.py --cfg ./configs/config_train.yaml
