@@ -42,6 +42,7 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
   - [Data Format](#data-format)
   - [Annotations](#annotations)
 - [SCRIPTS of PRTrack](#scripts-of-prtrack)
+  - [Preparation](#preparation)
   - [Running](#running)
   - [Evaluation](#evaluation)
   - [Demo](#demo)
@@ -138,11 +139,13 @@ A simple example is listed below.
 
 
 # SCRIPTS of PRTrack
+## Preparation
+Download the pretrained model from google drive [google](https://drive.google.com/file/d/1RMlu6XDMizCNmZ9zNLE8w7N3JNKgeejZ/view?usp=drive_link) and place it at './ckpt/'.
+
 ## Running
 You can easily train and evaluate the model by running the script below.
 
-
-You can include more details such as epoch, , etc. Please refer to `config.yaml`.
+You can include more details such as epoch, milestone, learning_rate, etc. Please refer to `config_train.yaml`.
 
 ~~~~
 python train.py --cfg ./configs/config_train.yaml
@@ -156,7 +159,7 @@ python test.py --cfg ./configs/config_test.yaml
 ~~~~
     
 ## Evaluation
-You can evaluate the model by running the command below. The pre-trained model can be found via baidu netdisk [baidu](https://pan.baidu.com/s/1-AqMBkCn36NFomOB2B8CYA?pwd=sqp3) and google drive [google](https://drive.google.com/file/d/12WfIHHIhOXkkQBfie8jc-AdVSFKATcsp/view?usp=drive_link). More details can be viewed in [eval](./evaluation).
+You can evaluate the model by running the command below. The trained model can be found via baidu netdisk [baidu](https://pan.baidu.com/s/1-AqMBkCn36NFomOB2B8CYA?pwd=sqp3) and google drive [google](https://drive.google.com/file/d/12WfIHHIhOXkkQBfie8jc-AdVSFKATcsp/view?usp=drive_link). More details can be viewed in [eval](./evaluation).
 
 ~~~~
 cd evaluation/MPOT
