@@ -162,7 +162,7 @@ A simple example is listed below.
 ## Preparation
 Download the pretrained model from google drive [google](https://drive.google.com/file/d/1RMlu6XDMizCNmZ9zNLE8w7N3JNKgeejZ/view?usp=drive_link) and place it at './ckpt/'.
 
-Adjust the local data directory in [`data.py`] (libs/dataset/data.py) by replacing `ROOT` with the parent directory of MPOT-3K. For example, adjust the following lines:
+Adjust the local data directory in [`data.py`](libs/dataset/data.py) by replacing `ROOT` with the parent directory of MPOT-3K. For example, adjust the following lines:
 ~~~~
 ROOT = '/mnt/sda/zzc/data/track'
 ~~~~
