@@ -1,0 +1,39 @@
+trainset: ['MPOTkp']
+valset: 'MPOTkp'
+datafreq: [5, 1]
+input_size: [720, 1280]   # h,w
+sampled_frames: 3
+max_skip: [50] 
+objs: [3]      
+samples_per_video: 2
+milestone: [10,13]
+
+keydim: 128
+valdim: 512
+arch: resnet50
+save_freq: 15
+epochs_per_increment: 5
+
+epochs: 15
+train_batch: 1
+learning_rate: 0.00001
+gamma: 0.5
+momentum: [0.9, 0.999]
+solver: 'adam'
+weight_decay: 5e-4
+iter_size: 1
+loss: 'both'
+mode: 'recurrent'
+iou_threshold: 0.65
+print_freq: 20
+
+workers: 20
+epoch_per_test: 6
+correction_rate: 180
+loop: 10
+# resume: ''
+resume: './ckpt/original.tar'
+initial: ''
+video_path: ''
+mask_path: ''
+gpu_id: 0
