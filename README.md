@@ -4,7 +4,7 @@
 #  <img src="./assets/mpot_logo.ico" style="vertical-align: sub;" width="40"> **Multiple Planar Object Tracking**
 
 
-<i>Zhicheng Zhang, Shengzhe Liu, and Jufeng Yang</i>
+<i>Zhicheng Zhang, Shengzhe Liu, Jufeng Yang</i>
 
 <a href=" "><img alt="PyTorch" src="https://img.shields.io/badge/PyTorch-ee4c2c?logo=pytorch&logoColor=white"></a>
 [![Conference](https://img.shields.io/badge/ICCV-2023-orange)](https://iccv2023.thecvf.com/)
