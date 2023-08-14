@@ -34,7 +34,7 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 
 - [ **Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
   - [Publication](#publication)
-- [Abstract](#abstract)
+- [ABSTRACT](#abstract)
 - [DEPENDENCY](#dependency)
     - [Recommended Environment](#recommended-environment)
 - [MPOT-3K DATASET](#mpot-3k-dataset)
@@ -49,7 +49,7 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 - [CITATION](#citation)
 
 
-# Abstract
+# ABSTRACT
 
 <img src="./assets/fig1o11.png" width="50%" align="right">Tracking both location and pose of multiple planar objects (MPOT) is of great significance to numerous real-world applications. The greater degree-of-freedom of planar objects compared with common objects makes MPOT far more challenging than well-studied object tracking, especially when occlusion occurs. To address this challenging task, we are inspired by amodal perception that humans jointly track visible and invisible parts of the target, and propose a tracking framework that unifies appearance perception and occlusion reasoning. Specifically, we present a dual branch network to track the visible part of planar objects, including vertexes and mask. Then, we develop an occlusion area localization strategy to infer the invisible part, i.e., the occluded region, followed by a two-stream attention network finally refining the prediction. To alleviate the lack of data in this field, we build the first large-scale benchmark dataset, namely MPOT-3K. It consists of 3,717 planar objects from 356 videos, and contains 148,896 frames together with 687,417 annotations. The collected planar objects have 9 motion patterns and the videos are shot in 6 types of indoor and outdoor scenes. Extensive experiments demonstrate the superiority of our proposed method on the newly developed MPOT-3K as well as other two popular single planar object tracking datasets.
 
