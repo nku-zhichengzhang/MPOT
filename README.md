@@ -21,7 +21,7 @@ This repository contains the official implementation of our work in ICCV 2023. *
 [<a href="https://zzcheng.top/MPOT#Video" target="_blank">Video</a>]
 [<a href="https://zzcheng.top/MPOT" target="_blank">Project Page</a>]
 [<a href="https://github.com/nku-zhichengzhang/MPOT" target="_blank">Github</a>]
-[<a href="https://github.com/nku-zhichengzhang/MPOT" target="_blank">MPOT-3K Dataset</a>]
+[<a href="https://github.com/nku-zhichengzhang/MPOT#mpot-3k-dataset" target="_blank">MPOT-3K Dataset</a>]
 [<a href="https://zzcheng.top/MPOT#Demo" target="_blank">Demo</a>]
 
 ## Publication
