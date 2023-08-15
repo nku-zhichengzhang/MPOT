@@ -160,7 +160,7 @@ A simple example is listed below.
 
 # SCRIPTS of PRTrack
 ## Preparation
-Download the pretrained model from google drive [google](https://drive.google.com/file/d/1RMlu6XDMizCNmZ9zNLE8w7N3JNKgeejZ/view?usp=drive_link) and place it at './ckpt/'.
+Download the pretrained model from google drive [checkpoint](https://drive.google.com/file/d/1RMlu6XDMizCNmZ9zNLE8w7N3JNKgeejZ/view?usp=sharing) and place it at './ckpt/'.
 
 Adjust the local data directory in [`data.py`](libs/dataset/data.py) by replacing `ROOT` with the parent directory of MPOT-3K. For example, adjust the following lines:
 ~~~~
@@ -184,7 +184,7 @@ python test.py --cfg ./configs/config_test.yaml
 ~~~~
     
 ## Evaluation
-You can evaluate the model by running the command below. The trained model can be found via baidu netdisk [baidu](https://pan.baidu.com/s/1-AqMBkCn36NFomOB2B8CYA?pwd=sqp3) and google drive [google](https://drive.google.com/file/d/12WfIHHIhOXkkQBfie8jc-AdVSFKATcsp/view?usp=drive_link). More details can be viewed in [eval](./evaluation).
+You can evaluate the model by running the command below. The trained model can be found via baidu netdisk [baidu](https://pan.baidu.com/s/1-AqMBkCn36NFomOB2B8CYA?pwd=sqp3) and google drive [google](https://drive.google.com/file/d/12WfIHHIhOXkkQBfie8jc-AdVSFKATcsp/view?usp=sharing). More details can be viewed in [eval](./evaluation).
 
 ~~~~
 cd evaluation/MPOT
