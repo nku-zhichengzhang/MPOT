@@ -73,10 +73,8 @@ pip install -r requirements.txt
 ```
 git clone https://github.com/NVIDIA/apex
 cd apex
-# if pip >= 23.1 (ref: https://pip.pypa.io/en/stable/news/#v23-1) which supports multiple `--config-settings` with the same key... 
-pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --config-settings "--build-option=--cpp_ext" --config-settings "--build-option=--cuda_ext" ./
-# otherwise
-pip install -v --disable-pip-version-check --no-cache-dir --no-build-isolation --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+git checkout f3a960f80244cf9e80558ab30f7f7e8cbf03c0a0
+python setup.py install --cuda_ext --cpp_ext
 ```
 We also provide our environment as a reference at [`enviroment.yml`](./environment.yml).
 
