@@ -32,7 +32,7 @@ epoch_per_test: 6
 correction_rate: 180
 loop: 10
 # resume: ''
-resume: './ckpt/original.tar'
+resume: './ckpt/prtrack.tar'
 initial: ''
 video_path: ''
 mask_path: ''
