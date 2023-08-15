@@ -4,9 +4,9 @@ datafreq: [5, 1]
 input_size: [720, 1280]   # h,w
 sampled_frames: 3
 max_skip: [50] 
-objs: [3]      
+objs: [3]
 samples_per_video: 2
-milestone: [10,13]
+milestone: [30,36]
 
 keydim: 128
 valdim: 512
@@ -14,7 +14,7 @@ arch: resnet50
 save_freq: 15
 epochs_per_increment: 5
 
-epochs: 15
+epochs: 40
 train_batch: 1
 learning_rate: 0.00001
 gamma: 0.5
