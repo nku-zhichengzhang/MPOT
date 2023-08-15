@@ -34,7 +34,7 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 </br>
 
 
-- [<img src="./assets/mpot_logo.ico" style="vertical-align: sub;" width="40"> **Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
+- [**Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
   - [Publication](#publication)
 - [ABSTRACT](#abstract)
 - [DEPENDENCY](#dependency)
