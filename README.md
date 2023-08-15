@@ -32,10 +32,13 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 </br>
 
 
-- [**Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
+- [ **Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
+  - [Publication](#publication)
 - [ABSTRACT](#abstract)
 - [DEPENDENCY](#dependency)
     - [Recommended Environment](#recommended-environment)
+    - [Automatic Install](#automatic-install)
+    - [Manual Install](#manual-install)
 - [MPOT-3K DATASET](#mpot-3k-dataset)
   - [Data Source](#data-source)
   - [Data Format](#data-format)
@@ -55,34 +58,51 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 
 
 # DEPENDENCY
-You can set up the environments by running the following lines:
 
-1. create virtual environment
+
+### Recommended Environment
+* CUDA 11.1
+* Python 3.7
+* Pytorch 1.8.1 
+* apex 0.1
+
+You can prepare your environment by running the following lines.
+
+### Automatic Install
+We prepare a frozen conda environment [`env`](./environment.yml) that can be directly copied.
 ```
 conda create -n prtrack python=3.6.13
 ```   
-    
+If it doesn't work, try installing the environment manually.
+
+### Manual Install
+1. create virtual environment
+```
+conda create -n prtrack python=3.6.13
+```      
 
 2. install torch and other
 ```
 pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
 pip install -r requirements.txt
 ```
-3. install apex, please refer to their github page in [here](https://github.com/NVIDIA/apex).
+3. install apex, please refer to their github page in [here](https://github.com/NVIDIA/apex) for more details.
 ```
+conda install -c conda-forge cudatoolkit-dev
 git clone https://github.com/NVIDIA/apex
 cd apex
 git checkout f3a960f80244cf9e80558ab30f7f7e8cbf03c0a0
 python setup.py install --cuda_ext --cpp_ext
 ```
+4. install DALI
+```
+pip install nvidia-pyindex
+pip install nvidia-dali
+```
+
 We also provide our environment as a reference at [`enviroment.yml`](./environment.yml).
 
 
-### Recommended Environment
-* CUDA 11.3
-* Python 3.6.13
-* Pytorch 1.8.1 
-* apex 0.1
 
 
 # MPOT-3K DATASET
@@ -153,16 +173,20 @@ A simple example is listed below.
 2|1|87.6|197.4|193.6|191.4|214.9|426.1|109.6|441.4|6|1
 
 
+<br><br>
 
 
 # SCRIPTS of PRTrack
 ## Preparation
-Download the pretrained model from google drive [checkpoint](https://drive.google.com/file/d/1RMlu6XDMizCNmZ9zNLE8w7N3JNKgeejZ/view?usp=sharing) and place it at './ckpt/'.
 
-Adjust the local data directory in [`data.py`](libs/dataset/data.py) by replacing `ROOT` with the parent directory of MPOT-3K. For example, adjust the following lines:
+
+**Dataset:** Adjust the local data directory in [`data.py`](libs/dataset/data.py) by replacing `ROOT` with the parent directory of MPOT-3K. For example, adjust the following lines:
 ~~~~
 ROOT = '/mnt/sda/zzc/data/track'
 ~~~~
+
+
+**Trained Model:** Download the pretrained model from google drive [checkpoint](https://drive.google.com/file/d/1RMlu6XDMizCNmZ9zNLE8w7N3JNKgeejZ/view?usp=sharing) and place it at './ckpt/'.
 
 ## Running
 You can easily train and evaluate the model by running the script below.
