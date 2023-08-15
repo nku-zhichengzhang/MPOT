@@ -13,7 +13,7 @@
 
 
 
-
+<img src="./assets/pop_back.png" width="100%">
 **Key motivation:** *Tracking both location and pose of multiple planar objects (MPOT) is of great significance to numerous real-world applications, including industrial, education, geometric, art, and our daily life.*
 
 
