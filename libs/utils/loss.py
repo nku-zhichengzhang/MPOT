@@ -271,7 +271,7 @@ def smooth_l1_loss(pred, target, gamma=0.075):
 
     return torch.mean(diff)
 
-def ref_mse_loss(pred,gt,num_object,ref,mse_loss):
+def ref_mse_loss(pred,gt,num_object,ref,mseloss):
     # centerness
     No, _, H, W = pred.size()
     loss = torch.zeros(1).to(pred.device)
@@ -292,7 +292,7 @@ def ref_mse_loss(pred,gt,num_object,ref,mse_loss):
         y_pred = pred[start +i]
         y_true = gt[start + i]
         # pos = y_pred.gt(0.5).sum()
-        ori_mse_loss = mse_loss(y_pred,y_true)
+        ori_mse_loss = mseloss(y_pred,y_true)
         obj_loss.append(ori_mse_loss)
         
     if ref is not None:
