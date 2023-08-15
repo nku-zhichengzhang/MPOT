@@ -69,9 +69,9 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 You can prepare your environment by running the following lines.
 
 ### Automatic Install
-We prepare a frozen conda environment [`env`](./environment.yml) that can be directly copied.
+We prepare a frozen conda environment [`env`](./env.yml) that can be directly copied.
 ```
-conda create -n prtrack python=3.6.13
+conda env create -f ./env.yml
 ```   
 If it doesn't work, try installing the environment manually.
 
