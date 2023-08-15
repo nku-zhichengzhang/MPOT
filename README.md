@@ -12,7 +12,7 @@
 </div>
 
 
-
+<img src="./assets\pop_back.png" width="100%">
 **Key motivation:** *Tracking both location and pose of multiple planar objects (MPOT) is of great significance to numerous real-world applications, including industrial, education, geometric, art, and our daily life.*
 
 
@@ -32,7 +32,8 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 </br>
 
 
-- [**Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
+- [<img src="./assets/mpot_logo.ico" style="vertical-align: sub;" width="40"> **Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
+  - [Publication](#publication)
 - [ABSTRACT](#abstract)
 - [DEPENDENCY](#dependency)
     - [Recommended Environment](#recommended-environment)
