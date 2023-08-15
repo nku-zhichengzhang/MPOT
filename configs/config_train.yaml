@@ -31,7 +31,7 @@ workers: 20
 epoch_per_test: 6
 correction_rate: 180
 loop: 10
-resume: './ckpt/pretrain_model.pth'
+resume: './ckpt/pretrained_model.pth'
 initial: ''
 video_path: ''
 mask_path: ''
