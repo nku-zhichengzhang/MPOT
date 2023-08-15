@@ -17,6 +17,7 @@
 
 
 This repository contains the official implementation of our work in ICCV 2023. **MPOT-3K** dataset and the pytorch training/validation code for **tracking framework PRTrack** are released. More details can be viewed in our paper.
+
 [<a href="../assets/2023_ICCV_MPOT.pdf" target="_blank">PDF</a>]
 [<a href="https://zzcheng.top/MPOT#Video" target="_blank">Video</a>]
 [<a href="https://zzcheng.top/MPOT" target="_blank">Project Page</a>]
