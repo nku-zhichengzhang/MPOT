@@ -33,7 +33,6 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 
 
 - [**Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
-  - [Publication](#publication)
 - [ABSTRACT](#abstract)
 - [DEPENDENCY](#dependency)
     - [Recommended Environment](#recommended-environment)
