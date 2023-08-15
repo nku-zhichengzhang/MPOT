@@ -34,7 +34,7 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 </br>
 
 
-- [**Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
+- [<img src="./assets/mpot_logo.ico" style="vertical-align: sub;" width="40"> **Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
   - [Publication](#publication)
 - [ABSTRACT](#abstract)
 - [DEPENDENCY](#dependency)
@@ -71,9 +71,9 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 You can prepare your environment by running the following lines.
 
 ### Automatic Install
-We prepare a frozen conda environment [`env`](./env.yml) that can be directly copied.
+We prepare a frozen conda environment [`env`](./env.yaml) that can be directly copied.
 ```
-conda env create -f ./env.yml
+conda env create -f ./env.yaml
 ```   
 If it doesn't work, try installing the environment manually.
 
@@ -102,7 +102,7 @@ pip install nvidia-pyindex
 pip install nvidia-dali
 ```
 
-We also provide our environment as a reference at [`env`](./env.yml).
+We also provide our environment as a reference at [`env`](./env.yaml).
 
 
 
