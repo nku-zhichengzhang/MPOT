@@ -78,7 +78,7 @@ conda env create -f ./env.yaml
 If it doesn't work, try installing the environment manually.
 
 ### Manual Install
-1. create virtual environment
+1. create a virtual environment
 ```
 conda create -n prtrack python=3.6.13
 ```      
@@ -88,7 +88,7 @@ conda create -n prtrack python=3.6.13
 pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
 pip install -r requirements.txt
 ```
-3. install apex, please refer to their github page in [here](https://github.com/NVIDIA/apex) for more details.
+3. install apex, please refer to their github page [here](https://github.com/NVIDIA/apex) for more details.
 ```
 conda install -c conda-forge cudatoolkit-dev
 git clone https://github.com/NVIDIA/apex
@@ -109,12 +109,12 @@ We also provide our environment as a reference at [`env`](./env.yaml).
 
 # MPOT-3K DATASET
 If you need the MPOT-3K dataset for academic purposes, please download the [**application form**](./assets/MPOT-3K_Data_Access_Form.docx) and fill out the request information, then send it to ***gloryzzc6@sina.com***.
-We will process your application as soon as possible.
+We will be sure to process your application as soon as possible.
 Please make sure that the email used comes from your educational institution.
 
 
 ## Data Source
-The collected scenes include lib, gallery, house, streetview, buildings, village. Besides, the videos are shoot under nine motion patterns that involves camera motion and target movement as follow:
+The collected scenes include lib, gallery, house, streetview, buildings, village. Besides, the videos are shoot under nine motion patterns that involve camera motion and target movement as follows:
 
 |Id|Motion Pattern|
 |  ----  | ----  |
@@ -217,7 +217,7 @@ python evalMPOT.py
 
 
 ## Demo
-We built online demo on gradio at [here]().
+We built an online demo on gradio [here]().
 
 
 # REFERENCE
