@@ -100,7 +100,7 @@ pip install nvidia-pyindex
 pip install nvidia-dali
 ```
 
-We also provide our environment as a reference at [`enviroment.yml`](./environment.yml).
+We also provide our environment as a reference at [`env`](./env.yml).
 
 
 
