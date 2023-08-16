@@ -19,12 +19,6 @@
 
 
 This repository contains the official implementation of our work in ICCV 2023. **MPOT-3K** dataset and the pytorch training/validation code for **tracking framework PRTrack** are released. More details can be viewed in our paper.<be>
-[<a href="../assets/2023_ICCV_MPOT.pdf" target="_blank">PDF</a>]
-[<a href="https://zzcheng.top/MPOT#Video" target="_blank">Video</a>]
-[<a href="https://zzcheng.top/MPOT" target="_blank">Project Page</a>]
-[<a href="https://github.com/nku-zhichengzhang/MPOT" target="_blank">Github</a>]
-[<a href="https://github.com/nku-zhichengzhang/MPOT#mpot-3k-dataset" target="_blank">MPOT-3K Dataset</a>]
-[<a href="https://zzcheng.top/MPOT#Demo" target="_blank">Demo</a>]
 
 ## Publication
 
@@ -32,9 +26,16 @@ This repository contains the official implementation of our work in ICCV 2023. *
 Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 <i>Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), 2023</i>.
 </br>
+[<a href="../assets/2023_ICCV_MPOT.pdf" target="_blank">PDF</a>]
+[<a href="https://zzcheng.top/MPOT#Video" target="_blank">Video</a>]
+[<a href="https://zzcheng.top/MPOT" target="_blank">Project Page</a>]
+[<a href="https://github.com/nku-zhichengzhang/MPOT" target="_blank">Github</a>]
+[<a href="https://github.com/nku-zhichengzhang/MPOT#mpot-3k-dataset" target="_blank">MPOT-3K Dataset</a>]
+[<a href="https://zzcheng.top/MPOT#Demo" target="_blank">Demo</a>]
 
 
-- [**Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
+
+- [ **Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
   - [Publication](#publication)
 - [ABSTRACT](#abstract)
 - [DEPENDENCY](#dependency)
@@ -81,13 +82,14 @@ If it doesn't work, try installing the environment manually.
 1. create a virtual environment
 ```
 conda create -n prtrack python=3.6.13
-```      
+```
 
 2. install torch and other
 ```
 pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
 pip install -r requirements.txt
 ```
+
 3. install apex, please refer to their github page [here](https://github.com/NVIDIA/apex) for more details.
 ```
 conda install -c conda-forge cudatoolkit-dev
@@ -96,6 +98,7 @@ cd apex
 git checkout f3a960f80244cf9e80558ab30f7f7e8cbf03c0a0
 python setup.py install --cuda_ext --cpp_ext
 ```
+
 4. install DALI
 ```
 pip install nvidia-pyindex
