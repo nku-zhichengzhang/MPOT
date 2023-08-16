@@ -65,7 +65,8 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
 ### Recommended Environment
 * CUDA 11.1
 * Python 3.7
-* Pytorch 1.8.1 
+* Pytorch 1.8.1
+* numpy 1.19.5
 * apex 0.1
 
 You can prepare your environment by running the following lines.
