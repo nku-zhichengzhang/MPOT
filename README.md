@@ -24,15 +24,14 @@ This repository contains the official implementation of our work in ICCV 2023. *
 
 >**Multiple Planar Object Tracking**<br>
 Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
-<i>Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), 2023</i>.
-</br>
+<i>Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV), 2023</i>.</br>
 [<a href="../assets/2023_ICCV_MPOT.pdf" target="_blank">PDF</a>]
 [<a href="https://zzcheng.top/MPOT#Video" target="_blank">Video</a>]
 [<a href="https://zzcheng.top/MPOT" target="_blank">Project Page</a>]
 [<a href="https://github.com/nku-zhichengzhang/MPOT" target="_blank">Github</a>]
 [<a href="https://github.com/nku-zhichengzhang/MPOT#mpot-3k-dataset" target="_blank">MPOT-3K Dataset</a>]
 [<a href="https://zzcheng.top/MPOT#Demo" target="_blank">Demo</a>]
-
+</br>
 
 
 - [ **Multiple Planar Object Tracking**](#-multiple-planar-object-tracking)
