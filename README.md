@@ -115,12 +115,6 @@ If you need the MPOT-3K dataset for academic purposes, please download the [**ap
 We will be sure to process your application as soon as possible.
 Please make sure that the email used comes from your educational institution.
 
-Once obtain MPOT-3K, extract the data files from a set of zip files by following lines:
-~~~~
-zip mpot-3k.zip -s=0 --out mpot_single.zip
-unzip -d ./ mpot_single.zip
-~~~~
-
 ## Data Source
 The collected scenes include lib, gallery, house, streetview, buildings, village. Besides, the videos are shoot under nine motion patterns that involve camera motion and target movement as follows:
 
@@ -190,7 +184,13 @@ A simple example is listed below.
 ## Preparation
 
 
-**Dataset:** Adjust the local data directory in [`data.py`](libs/dataset/data.py) by replacing `ROOT` with the parent directory of MPOT-3K. For example, adjust the following lines:
+**Dataset:** After obtaining the MPOT-3K, follow the command below to extract data files from a set of zip files.
+~~~~
+zip mpot-3k.zip -s=0 --out mpot_single.zip
+unzip -d ./ mpot_single.zip
+~~~~
+
+Adjust the local data directory in [`data.py`](libs/dataset/data.py) by replacing `ROOT` with the parent directory of MPOT-3K. For example, adjust the following lines:
 ~~~~
 ROOT = '/mnt/sda/zzc/data/track'
 ~~~~
