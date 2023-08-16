@@ -4,3 +4,4 @@ pyyaml
 yacs
 imgaug
 progress
+numpy==1.19.5
