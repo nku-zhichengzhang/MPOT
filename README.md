@@ -15,10 +15,10 @@
 
 <img src="./assets/pop_back.png" width="100%">
 
-**Key motivation:** *Tracking both location and pose of multiple planar objects (MPOT) is of great significance to numerous real-world applications, including industrial, education, geometric, art, and our daily life.*
+**Key motivation:** *Tracking both location and pose of multiple planar objects (MPOT) is of great significance to numerous real-world applications, including industrial, education, geometry, art, and our daily life.*
 
 
-This repository contains the official implementation of our work in ICCV 2023. **MPOT-3K** dataset and the pytorch training/validation code for **tracking framework PRTrack** are released. More details can be viewed in our paper.<be>
+This repository contains the official implementation of our work in ICCV 2023. **MPOT-3K** dataset and the pytorch code for **tracking-by-reasoning framework PRTrack** are released. More details can be viewed in our paper.<be>
 
 ## Publication
 
