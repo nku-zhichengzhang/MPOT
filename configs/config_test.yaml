@@ -36,4 +36,4 @@ resume: './ckpt/prtrack.tar'
 initial: ''
 video_path: ''
 mask_path: ''
-gpu_id: 0
+gpu_id: '0'

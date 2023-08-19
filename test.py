@@ -31,19 +31,18 @@ torch.backends.cudnn.enabled = True
 torch.backends.cudnn.benchmark = True
 MAX_FLT = 1e6
 
-# parse args (set random seed: 20)
+# parse args
 opt, _ = parse_args()
-code_id = '0'
 tag='res'
 split='test'
 
 # Use CUDA
-device = 'cuda:{}'.format(opt.gpu_id)
-use_gpu = torch.cuda.is_available() and int(opt.gpu_id) >= 0
+use_gpu = torch.cuda.is_available()
+device = 'cuda' if use_gpu else 'cpu'
 
 # initial logger
 LOG_DIR = os.path.join(opt.checkpoint,'log')
-writer = SummaryWriter(log_dir=LOG_DIR+code_id)
+writer = SummaryWriter(log_dir=LOG_DIR)
 logger.setup(filename='test_out.log', resume=False)
 log = logger.getLogger(__name__)
 

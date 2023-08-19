@@ -43,16 +43,16 @@ MAX_FLT = 1e6
 
 opt, _ = parse_args()
 
-code_id = '0'
-
 coord_rate = 100
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = code_id
+os.environ["CUDA_VISIBLE_DEVICES"] = opt.gpu_id
 
-# print(opt)
-device = 'cuda:{}'.format(opt.gpu_id)
-print('Running code in: '+device)
+# Use CUDA
+use_gpu = torch.cuda.is_available()
+device = 'cuda' if use_gpu else 'cpu'
+
+print('Running code in: '+opt.gpu_id)
 tag = 'resnet50_center_radius'
 opt.output_dir = tag
 LOG_DIR = os.path.join(opt.checkpoint,'log'+tag)
@@ -60,7 +60,8 @@ if os.path.exists(LOG_DIR):
     shutil.rmtree(LOG_DIR)    
 os.makedirs(LOG_DIR)
 writer = SummaryWriter(log_dir=LOG_DIR)
-# gpu_tracker = MemTracker()
+
+
 def main():
 
     # setup

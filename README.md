@@ -1,7 +1,7 @@
 <div align="center">
 
 
-#  <img src="./assets/mpot_logo.ico" style="vertical-align: sub;" width="40"> **Multiple Planar Object Tracking**
+# <img src="./assets/mpot_logo.ico" style="vertical-align: sub;" width="40"> **Multiple Planar Object Tracking**
 
 
 <i>Zhicheng Zhang, Shengzhe Liu, Jufeng Yang</i>
@@ -47,7 +47,9 @@ Zhicheng Zhang, Shengzhe Liu, Jufeng Yang<br>
   - [Annotations](#annotations)
 - [SCRIPTS of PRTrack](#scripts-of-prtrack)
   - [Preparation](#preparation)
-  - [Running](#running)
+  - [Train](#train)
+  - [Resume](#resume)
+  - [Test](#test)
   - [Evaluation](#evaluation)
   - [Demo](#demo)
 - [REFERENCE](#reference)
@@ -198,7 +200,7 @@ ROOT = '/mnt/sda/zzc/data/track'
 
 **Pre-trained Model:** Download the pretrained model from google drive [checkpoint](https://drive.google.com/file/d/1RMlu6XDMizCNmZ9zNLE8w7N3JNKgeejZ/view?usp=sharing) and place it at './ckpt/'.
 
-## Running
+## Train
 You can easily train and evaluate the model by running the script below.
 
 You can include more details such as epoch, milestone, learning_rate, etc. Please refer to [`config_train.yaml`](configs/config_train.yaml).
@@ -208,7 +210,14 @@ python train.py --cfg ./configs/config_train.yaml
 ~~~~
 
 
-For testing
+## Resume
+Please set the path of the intermediate checkpoint in [`config_train.yaml`](configs/config_train.yaml) for resume.
+~~~~
+resume: './ckpt/prtrack_r50/recurrent_epoch_10.pth.tar'
+~~~~
+
+## Test
+Our provided script can be applied for using the trained model to track planar objects and get the corresponding prediction results.
 
 ~~~~
 python test.py --cfg ./configs/config_test.yaml

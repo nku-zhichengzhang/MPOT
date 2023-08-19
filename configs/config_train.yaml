@@ -35,4 +35,4 @@ resume: './ckpt/pretrain_model.pth'
 initial: ''
 video_path: ''
 mask_path: ''
-gpu_id: 0
+gpu_id: '0'
